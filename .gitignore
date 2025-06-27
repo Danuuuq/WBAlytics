@@ -29,7 +29,7 @@ MANIFEST
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
+*.в
 *.spec
 
 # Installer logs
@@ -60,6 +60,7 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+dump.rdb
 
 # Flask stuff:
 instance/

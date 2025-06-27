@@ -1,0 +1,8 @@
+Django==5.2.3
+djangorestframework==3.16.0
+django-cors-headers==4.7.0
+django-filter==25.1
+django-redis==6.0.0
+psycopg2_binary==2.9.10
+python_decouple==3.8
+requests==2.32.4

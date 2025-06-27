@@ -1,0 +1,33 @@
+import React, { useEffect, useState } from 'react';
+import { fetchProducts, fetchCategories } from './api';
+import Filters from './components/Filters';
+import ProductTable from './components/ProductTable';
+
+function App() {
+  const [filters, setFilters] = useState({});
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [sortBy, setSortBy] = useState({ field: 'price', direction: 'asc' });
+
+  useEffect(() => {
+    fetchCategories().then(setCategories);
+  }, []);
+
+  useEffect(() => {
+    if (!filters.query) return;
+    const timeout = setTimeout(() => {
+      fetchProducts(filters).then(setProducts);
+    }, 900);
+    return () => clearTimeout(timeout);
+  }, [filters]);
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Аналитика товаров Wildberries</h1>
+      <Filters filters={filters} setFilters={setFilters} categories={categories} />
+      <ProductTable products={products} sortBy={sortBy} setSortBy={setSortBy} />
+    </div>
+  );
+}
+
+export default App;
