@@ -8,7 +8,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY')
 DEBUG = config('DJANGO_DEBUG', cast=bool)
 
-# ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', cast=list)
 
 
@@ -78,7 +77,6 @@ CACHES = {
         'LOCATION': config('REDIS_URL', 'redis://localhost:6379/0'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            # 'PASSWORD': config('REDIS_PASSWORD', ''),
             'CONNECTION_POOL_KWARGS': {
                 'max_connections': 20,
                 'retry_on_timeout': True,
@@ -86,33 +84,24 @@ CACHES = {
                 'socket_timeout': 5,
             },
             'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
-            'IGNORE_EXCEPTIONS': True,  # Не падать при недоступности Redis
+            'IGNORE_EXCEPTIONS': True,
         },
         'KEY_PREFIX': 'wb_products',
-        'TIMEOUT': 3600,  # 1 час по умолчанию
+        'TIMEOUT': 3600,
         'VERSION': 1,
     }
 }
 
-# Дополнительные настройки для кеша товаров
 REDIS_SETTINGS = {
-    'PRODUCT_CACHE_TIMEOUT': 3600 * 24,  # 24 часа для товаров
-    'CATEGORY_CACHE_TIMEOUT': 3600 * 12,  # 12 часов для категории
+    'PRODUCT_CACHE_TIMEOUT': 3600 * 24,
+    'CATEGORY_CACHE_TIMEOUT': 3600 * 12,
     'MAX_CONNECTIONS': 20,
     'RETRY_ON_TIMEOUT': True,
 }
 
-# Настройка для сессий в Redis (опционально)
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 SESSION_COOKIE_AGE = 3600 * 24 * 7  # 7 дней
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']
 

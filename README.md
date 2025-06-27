@@ -11,6 +11,7 @@
 * Python 3.11+
 * Django 5+
 * Django REST Framework
+* PostgreSQL (для хранения данных в БД)
 * Redis (для кэширования)
 
 ### Frontend (React):
@@ -33,40 +34,41 @@
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/your-username/wb-analytics.git
-cd wb-analytics
+git clone https://github.com/your-username/WBAlytics.git
+cd WBAlytics/infra
 ```
 
 ### 2. Конфигурация
 
-Создайте файл `.env` в папке `infra/`:
+Создайте файл `.env` в директории `infra/`, референс `.env.example`:
 
 ```env
-DJANGO_SECRET_KEY=your-secret
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-REDIS_HOST=redis
+# PostgreSQL
+POSTGRES_DB=wb_db
+POSTGRES_USER=wb_user
+POSTGRES_PASSWORD=wb_pass
+DB_HOST=db
+DB_PORT=5432
+
+# Django
+DJANGO_SECRET_KEY=YourSecretKeyNeedTypeHere
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=*
+
+# Redis
+REDIS_URL=redis://redis:6379/1
+
+# React
+REACT_APP_API_URL=/api
 ```
 
 ### 3. Запуск через Docker Compose
 
 ```bash
-docker-compose up --build
+sudo docker compose up --build
 ```
 
-Проект будет доступен по адресу: `http://localhost:8000`
-Фронтенд: `http://localhost:3000`
-
----
-
-## 🔧 CI/CD (GitHub Actions)
-
-Пример `.github/workflows/main.yml` включает:
-
-* Проверку PEP8 (flake8)
-* Прогон тестов
-* Сборку Docker-образа
-* Возможное выкладывание на сервер
+Проект будет доступен по адресу: `http://localhost` или `http://<ip_add_server>`
 
 ---
 
@@ -75,7 +77,7 @@ docker-compose up --build
 ### 1. Получение и отображение товаров по категориям
 
 * Автоматический парсинг данных по категории
-* Кэширование результатов на 1 час (в Redis)
+* Кэширование результатов в Redis, первая загрузка категории долго далее быстрее
 
 ### 2. Фильтрация по товарам
 
@@ -102,7 +104,7 @@ docker-compose up --build
 
 * 🌀 Гистограмма цен (динамические интервалы)
 * 📈 Линейный график: скидка против рейтинга
-* 📉 График: стоимость против количества отзывов
+* 📉 График: стоимость против рейтинга
 
 ---
 
