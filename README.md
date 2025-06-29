@@ -65,7 +65,7 @@ REACT_APP_API_URL=/api
 ### 3. Запуск через Docker Compose
 
 ```bash
-sudo docker compose up --build
+sudo docker compose up -d
 ```
 
 Проект будет доступен по адресу: `http://localhost` или `http://<ip_add_server>`
