@@ -68,7 +68,8 @@ REACT_APP_API_URL=/api
 sudo docker compose up -d
 ```
 
-Проект будет доступен по адресу: `http://localhost` или `http://<ip_add_server>`
+Проект будет доступен по адресу: `http://localhost:9000` или `http://<ip_add_server>:9000`  
+Либо настройте локальный nginx на проброс портов к 9000 в докер.
 
 ---
 
